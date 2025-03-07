@@ -2,7 +2,7 @@ import de.bezier.guido.*;
 
 private static final int NUM_ROWS = 40;
 private static final int NUM_COLS = 40;
-private static final int NUM_MINES = 100;
+private static final int NUM_MINES = 150;
 
 private MSButton[][] buttons;
 private ArrayList <MSButton> mines = new ArrayList <MSButton> ();
