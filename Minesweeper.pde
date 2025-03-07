@@ -131,6 +131,10 @@ public class MSButton
     }
 public void mousePressed () 
 {
+    if (gameOver) {
+        return; 
+    }
+
     if (mouseButton == RIGHT && !clicked) {
         flagged = !flagged;
     } else if (!flagged) {
