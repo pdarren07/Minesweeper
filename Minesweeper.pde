@@ -132,19 +132,10 @@ public class MSButton
 public void mousePressed () 
 {
     clicked = true;
-
-    if (!gameStarted) {
-        gameStarted = true;  
-    }
-
-    if (mouseButton == RIGHT) {
+if (mouseButton == RIGHT && !clicked) {
         flagged = !flagged;
-        clicked = false;
     } else if (mines.contains(this)) {
-        if (!gameStarted) {
-            resetMines(); 
-        }
-        displayLosingMessage();
+        displayLosingMessage(); 
         gameOver = true; 
         for (MSButton mine : mines) {
             mine.clicked = true; 
