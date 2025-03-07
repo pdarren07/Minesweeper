@@ -129,29 +129,29 @@ public class MSButton
         flagged = clicked = false;
         Interactive.add( this ); 
     }
-public void mousePressed() 
+public void mousePressed () 
 {
     clicked = true;
 
-    // Allow flagging only if the box is not clicked
-    if (mouseButton == RIGHT && !clicked) {
+    if (!gameStarted) {
+        gameStarted = true;  
+    }
+
+    if (mouseButton == RIGHT) {
         flagged = !flagged;
-        clicked = false;  // Keep it unchecked after flagging
-    } 
-    // Handle the case when a mine is clicked
-    else if (mines.contains(this)) {
-        displayLosingMessage(); 
+        clicked = false;
+    } else if (mines.contains(this)) {
+        if (!gameStarted) {
+            resetMines(); 
+        }
+        displayLosingMessage();
         gameOver = true; 
         for (MSButton mine : mines) {
             mine.clicked = true; 
         }
-    } 
-    // Handle the case when a number of mines is displayed
-    else if (countMines(myRow, myCol) > 0) {
+    } else if (countMines(myRow, myCol) > 0) {
         setLabel(str(countMines(myRow, myCol)));
-    } 
-    // Handle the case when the button is empty, triggering recursive revealing
-    else {
+    } else {
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 if (i == 0 && j == 0) {
