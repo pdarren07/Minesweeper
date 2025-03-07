@@ -50,9 +50,6 @@ public void draw ()
     //if(!isWon())
       //displayLosingMessage();
 }
-void keyPressed() {
-    resetBoard();
-}
 public boolean isWon()
 {
     //your code here
@@ -139,37 +136,41 @@ public class MSButton
     }
 
     // called by manager
-    public void mousePressed () 
-    {
-        clicked = true;
-        //your code here
-    if (mouseButton == RIGHT) {
-      flagged = !flagged;
-      clicked = false;
-    } else if (mines.contains(this)) {
-      displayLosingMessage(); 
-      gameOver = true; 
-      for (MSButton mine : mines) {
-        mine.clicked = true; 
-  }
-    } else if (countMines(myRow, myCol) > 0) {
-      setLabel(str(countMines(myRow, myCol)));
-    } else {
-      for (int i = -1; i <= 1; i++) {
-        for (int j = -1; j <= 1; j++) {
-          if (i == 0 && j == 0) {
-            continue;
-          }
-
-          if (isValid(myRow + i, myCol + j)) {
-            if (!buttons[myRow + i][myCol + j].flagged && !buttons[myRow + i][myCol + j].clicked) {
-                buttons[myRow + i][myCol + j].mousePressed();
-            }
-          }
-        }
-      }
+    public void mousePressed() {
+    if (gameOver) {
+        return;  // Prevent pressing when the game is over
     }
-  }
+
+    clicked = true;
+
+    if (mouseButton == RIGHT) {
+        flagged = !flagged;
+        clicked = false;
+    } else if (mines.contains(this)) {
+        displayLosingMessage();
+        gameOver = true;
+        // Reveal all mines when the game is lost
+        for (MSButton mine : mines) {
+            mine.clicked = true;
+        }
+    } else if (countMines(myRow, myCol) > 0) {
+        setLabel(str(countMines(myRow, myCol)));
+    } else {
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (i == 0 && j == 0) {
+                    continue;
+                }
+
+                if (isValid(myRow + i, myCol + j)) {
+                    if (!buttons[myRow + i][myCol + j].flagged && !buttons[myRow + i][myCol + j].clicked) {
+                        buttons[myRow + i][myCol + j].mousePressed();
+                    }
+                }
+            }
+        }
+    }
+}
     public void draw () 
     {    
         if (flagged)
