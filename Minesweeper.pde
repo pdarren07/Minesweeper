@@ -137,7 +137,7 @@ public void mousePressed ()
         gameStarted = true;  
     }
 
-    if (mouseButton == RIGHT) {
+    if (mouseButton == RIGHT && !clicked) {
         flagged = !flagged;
         clicked = false;
     } else if (mines.contains(this)) {
