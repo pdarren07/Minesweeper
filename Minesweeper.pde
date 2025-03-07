@@ -7,6 +7,7 @@ private static final int NUM_MINES = 100;
 private MSButton[][] buttons;
 private ArrayList <MSButton> mines = new ArrayList <MSButton> ();
 private boolean gameOver = false;
+private boolean gameStarted = false; // To track if the game has started
 
 void setup () {
   size(800, 800);
