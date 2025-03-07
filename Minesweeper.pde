@@ -51,9 +51,7 @@ public void draw ()
       //displayLosingMessage();
 }
 void keyPressed() {
-  if (key == ' ') { // Detect spacebar
     resetBoard();
-  }
 }
 public boolean isWon()
 {
