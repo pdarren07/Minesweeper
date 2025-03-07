@@ -199,6 +199,24 @@ public class MSButton
         return flagged;
     }
 }
-
+void keyPressed() {
+    if (gameOver) {
+        resetBoard(); // Reset the game only if it's over
+    }
+}
+public void resetBoard() {
+    gameOver = false; 
+    mines.clear();    
+    for (int i = 0; i < buttons.length; i++) {
+        for (int j = 0; j < buttons[i].length; j++) {
+            buttons[i][j].clicked = false; 
+            buttons[i][j].flagged = false; 
+            buttons[i][j].setLabel("");    
+        }
+    }
+    for (int k = 0; k < NUM_MINES; k++) {
+        setMines();
+    }
+}
 
 
