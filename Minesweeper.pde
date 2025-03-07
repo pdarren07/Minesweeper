@@ -41,14 +41,14 @@ public void setMines()
 public void draw ()
 {
     background( 0 );
-    //if(isWon() && !gameOver)
-      //displayWinningMessage();
-    //if(!isWon() && gameOver)
-      //displayLosingMessage();
-    if(isWon())
+    if(isWon() && !gameOver)
       displayWinningMessage();
-    if(!isWon())
+    if(!isWon() && gameOver)
       displayLosingMessage();
+    //if(isWon())
+      //displayWinningMessage();
+    //if(!isWon())
+      //displayLosingMessage();
 }
 public boolean isWon()
 {
