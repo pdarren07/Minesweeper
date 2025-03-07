@@ -63,8 +63,8 @@ public boolean isWon()
       }
     }
   }
-  return true;
-  //return false;
+  //return true;
+  return false;
 }
 public void displayLosingMessage() {
   String[] arr = {"Y", "o", "u", " ", "L", "o", "s", "t", "!"};
@@ -157,7 +157,6 @@ public class MSButton
 
           if (isValid(myRow + i, myCol + j)) {
             if (!buttons[myRow + i][myCol + j].flagged && !buttons[myRow + i][myCol + j].clicked) {
-              //if(countMines(myRow + i, myCol + j) == 0){
                 buttons[myRow + i][myCol + j].mousePressed();
             }
           }
