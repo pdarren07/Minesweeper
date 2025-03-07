@@ -157,7 +157,7 @@ public class MSButton
 
           if (isValid(myRow + i, myCol + j)) {
             if (!buttons[myRow + i][myCol + j].flagged && !buttons[myRow + i][myCol + j].clicked) {
-              //if(countMines(myRow + i, myCol + j) == 0){
+              if(countMines(myRow + i, myCol + j) == 0){
                 buttons[myRow + i][myCol + j].mousePressed();
             }
           }
