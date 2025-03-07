@@ -8,6 +8,7 @@ private MSButton[][] buttons;
 private ArrayList <MSButton> mines = new ArrayList <MSButton> ();
 private boolean gameOver = false;
 private boolean gameStarted = false; 
+private boolean firstClick = true;
 
 void setup () {
   size(800, 800);
@@ -30,8 +31,8 @@ void setup () {
 public void setMines() {
     int r = (int)(Math.random() * NUM_ROWS);
     int c = (int)(Math.random() * NUM_COLS);
-    if (mines.contains(buttons[r][c]) || buttons[r][c].clicked) {
-        setMines(); 
+    if (firstClick || mines.contains(buttons[r][c]) || buttons[r][c].clicked) {
+        setMines();
     } else {
         mines.add(buttons[r][c]);
     }
@@ -124,15 +125,19 @@ public class MSButton
         flagged = clicked = false;
         Interactive.add( this ); 
     }
-public void mousePressed () 
-{
+public void mousePressed () {
     if (gameOver) {
         return; 
     }
 
+    if (firstClick) {
+        firstClick = false;
+        // Regenerate mines after the first click to avoid a mine being placed on the first clicked box
+        resetMines();
+    }
+
     if (mouseButton == RIGHT && !clicked) {
         flagged = !flagged;
-        fill(0,255,0);
     } else if (!flagged) {
         clicked = true;
         if (mines.contains(this)) {
