@@ -41,14 +41,14 @@ public void setMines()
 public void draw ()
 {
     background( 0 );
-    if(isWon() && !gameOver)
-      displayWinningMessage();
-    if(!isWon() && gameOver)
-      displayLosingMessage();
-    //if(isWon())
+    //if(isWon() && !gameOver)
       //displayWinningMessage();
-    //if(!isWon())
+    //if(!isWon() && gameOver)
       //displayLosingMessage();
+    if(isWon())
+      displayWinningMessage();
+    if(!isWon())
+      displayLosingMessage();
 }
 public boolean isWon()
 {
@@ -89,9 +89,9 @@ public void displayWinningMessage() {
     }
   }
 
-  //gameOver = true;
-  if(gameOver) 
-    return;
+  gameOver = true;
+  //if(gameOver) 
+    //return;
 }
 public boolean isValid(int r, int c)
 {
@@ -157,8 +157,7 @@ public class MSButton
 
           if (isValid(myRow + i, myCol + j)) {
             if (!buttons[myRow + i][myCol + j].flagged && !buttons[myRow + i][myCol + j].clicked) {
-              //buttons[myRow + i][myCol + j].mousePressed();
-              if(countMines(myRow + i, myCol + j) == 0){
+              //if(countMines(myRow + i, myCol + j) == 0){
                 buttons[myRow + i][myCol + j].mousePressed();
             }
           }
