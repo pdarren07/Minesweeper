@@ -26,16 +26,16 @@ void setup () {
   }
 }
 
-public void setMines()
-{
-  int r = (int)(Math.random() * NUM_ROWS);
-  int c = (int)(Math.random() * NUM_COLS);
+public void setMines() {
+    int r = (int)(Math.random() * NUM_ROWS);
+    int c = (int)(Math.random() * NUM_COLS);
 
-  if (!mines.contains(buttons[r][c])) {
-    mines.add(buttons[r][c]);
-  } else {
-    setMines();
-  }
+    // Prevent placing the first clicked button on a mine
+    if (mines.contains(buttons[r][c]) || buttons[r][c].clicked) {
+        setMines(); // Retry if the mine is already placed or on a clicked cell
+    } else {
+        mines.add(buttons[r][c]);
+    }
 }
 
 public void draw ()
@@ -136,22 +136,26 @@ public class MSButton
     }
 
     // called by manager
-    public void mousePressed() {
-    if (gameOver) {
-        return;  // Prevent pressing when the game is over
-    }
-
+    public void mousePressed () 
+{
     clicked = true;
+
+    if (!gameStarted) {
+        gameStarted = true;  // Mark that the game has started
+    }
 
     if (mouseButton == RIGHT) {
         flagged = !flagged;
         clicked = false;
     } else if (mines.contains(this)) {
+        if (!gameStarted) {
+            // Reposition mines if the game has not started yet
+            resetMines(); 
+        }
         displayLosingMessage();
-        gameOver = true;
-        // Reveal all mines when the game is lost
+        gameOver = true; 
         for (MSButton mine : mines) {
-            mine.clicked = true;
+            mine.clicked = true; 
         }
     } else if (countMines(myRow, myCol) > 0) {
         setLabel(str(countMines(myRow, myCol)));
@@ -218,5 +222,10 @@ public void resetBoard() {
         setMines();
     }
 }
-
+public void resetMines() {
+    mines.clear(); // Clear existing mines
+    for (int k = 0; k < NUM_MINES; k++) {
+        setMines(); // Recreate the mines with new positions
+    }
+}
 
