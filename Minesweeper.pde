@@ -50,6 +50,11 @@ public void draw ()
     //if(!isWon())
       //displayLosingMessage();
 }
+void keyPressed() {
+  if (key == ' ') { // Detect spacebar
+    resetBoard();
+  }
+}
 public boolean isWon()
 {
     //your code here
