@@ -7,7 +7,7 @@ private static final int NUM_MINES = 150;
 private MSButton[][] buttons;
 private ArrayList <MSButton> mines = new ArrayList <MSButton> ();
 private boolean gameOver = false;
-private boolean gameStarted = false; // To track if the game has started
+private boolean gameStarted = false; 
 
 void setup () {
   size(800, 800);
@@ -33,7 +33,7 @@ public void setMines() {
 
     // Prevent placing the first clicked button on a mine
     if (mines.contains(buttons[r][c]) || buttons[r][c].clicked) {
-        setMines(); // Retry if the mine is already placed or on a clicked cell
+        setMines(); 
     } else {
         mines.add(buttons[r][c]);
     }
@@ -46,10 +46,6 @@ public void draw ()
       displayWinningMessage();
     if(!isWon() && gameOver)
       displayLosingMessage();
-    //if(isWon())
-      //displayWinningMessage();
-    //if(!isWon())
-      //displayLosingMessage();
 }
 public boolean isWon()
 {
@@ -72,7 +68,7 @@ public void displayLosingMessage() {
   for (int k = 0; k < arr.length; k++) {
     if (k < NUM_COLS) {
       buttons[0][k].setLabel(arr[k]);
-      buttons[0][k].clicked = true; // Reveal the message
+      buttons[0][k].clicked = true; 
     }
   }
 
@@ -85,11 +81,9 @@ public void displayWinningMessage() {
   for (int k = 0; k < arr.length; k++) {
     if (k < NUM_COLS) {
       buttons[0][k].setLabel(arr[k]);
-      buttons[0][k].clicked = true; // Reveal the message
+      buttons[0][k].clicked = true; 
     }
   }
-
-  //gameOver = true;
   if(gameOver) 
     return;
 }
@@ -133,16 +127,14 @@ public class MSButton
         y = myRow*height;
         myLabel = "";
         flagged = clicked = false;
-        Interactive.add( this ); // register it with the manager
+        Interactive.add( this ); 
     }
-
-    // called by manager
     public void mousePressed () 
 {
     clicked = true;
 
     if (!gameStarted) {
-        gameStarted = true;  // Mark that the game has started
+        gameStarted = true; 
     }
 
     if (mouseButton == RIGHT) {
@@ -150,7 +142,6 @@ public class MSButton
         clicked = false;
     } else if (mines.contains(this)) {
         if (!gameStarted) {
-            // Reposition mines if the game has not started yet
             resetMines(); 
         }
         displayLosingMessage();
@@ -206,7 +197,7 @@ public class MSButton
 }
 void keyPressed() {
     if (gameOver) {
-        resetBoard(); // Reset the game only if it's over
+        resetBoard(); 
     }
 }
 public void resetBoard() {
@@ -224,9 +215,9 @@ public void resetBoard() {
     }
 }
 public void resetMines() {
-    mines.clear(); // Clear existing mines
+    mines.clear(); 
     for (int k = 0; k < NUM_MINES; k++) {
-        setMines(); // Recreate the mines with new positions
+        setMines();
     }
 }
 
