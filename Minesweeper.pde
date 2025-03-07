@@ -131,27 +131,29 @@ public class MSButton
     }
 public void mousePressed () 
 {
-    clicked = true;
-if (mouseButton == RIGHT && !clicked) {
+    if (mouseButton == RIGHT && !clicked) {
         flagged = !flagged;
-    } else if (mines.contains(this)) {
-        displayLosingMessage(); 
-        gameOver = true; 
-        for (MSButton mine : mines) {
-            mine.clicked = true; 
-        }
-    } else if (countMines(myRow, myCol) > 0) {
-        setLabel(str(countMines(myRow, myCol)));
-    } else {
-        for (int i = -1; i <= 1; i++) {
-            for (int j = -1; j <= 1; j++) {
-                if (i == 0 && j == 0) {
-                    continue;
-                }
+    } else if (!flagged) {
+        clicked = true;
+        if (mines.contains(this)) {
+            displayLosingMessage(); 
+            gameOver = true; 
+            for (MSButton mine : mines) {
+                mine.clicked = true; 
+            }
+        } else if (countMines(myRow, myCol) > 0) {
+            setLabel(str(countMines(myRow, myCol)));
+        } else {
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    if (i == 0 && j == 0) {
+                        continue;
+                    }
 
-                if (isValid(myRow + i, myCol + j)) {
-                    if (!buttons[myRow + i][myCol + j].flagged && !buttons[myRow + i][myCol + j].clicked) {
-                        buttons[myRow + i][myCol + j].mousePressed();
+                    if (isValid(myRow + i, myCol + j)) {
+                        if (!buttons[myRow + i][myCol + j].flagged && !buttons[myRow + i][myCol + j].clicked) {
+                            buttons[myRow + i][myCol + j].mousePressed();
+                        }
                     }
                 }
             }
