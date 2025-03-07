@@ -30,8 +30,6 @@ void setup () {
 public void setMines() {
     int r = (int)(Math.random() * NUM_ROWS);
     int c = (int)(Math.random() * NUM_COLS);
-
-    // Prevent placing the first clicked button on a mine
     if (mines.contains(buttons[r][c]) || buttons[r][c].clicked) {
         setMines(); 
     } else {
@@ -49,7 +47,6 @@ public void draw ()
 }
 public boolean isWon()
 {
-    //your code here
   for (int i = 0; i < buttons.length; i++) {
     for (int j = 0; j < buttons[i].length; j++) {
       if (mines.contains(buttons[i][j]) && !buttons[i][j].isFlagged()) {
@@ -89,13 +86,11 @@ public void displayWinningMessage() {
 }
 public boolean isValid(int r, int c)
 {
-    //your code here
     return !(r >= NUM_ROWS || c >= NUM_COLS || r < 0 || c < 0);
 }
 public int countMines(int row, int col)
 {
     int numMines = 0;
-    //your code here
     for (int i = -1; i < 2; i++) {
     for (int j = -1; j < 2; j++) {
       if (i == 0 && j == 0) {
@@ -137,6 +132,7 @@ public void mousePressed ()
 
     if (mouseButton == RIGHT && !clicked) {
         flagged = !flagged;
+        fill(0,255,0);
     } else if (!flagged) {
         clicked = true;
         if (mines.contains(this)) {
