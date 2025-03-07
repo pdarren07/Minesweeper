@@ -132,7 +132,6 @@ public void mousePressed ()
 
     if (mouseButton == RIGHT && !clicked) {
         flagged = !flagged;
-        fill(0,255,0);
     } else if (!flagged) {
         clicked = true;
         if (mines.contains(this)) {
