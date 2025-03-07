@@ -63,8 +63,7 @@ public boolean isWon()
       }
     }
   }
-  //return true;
-  return false;
+  return true;
 }
 public void displayLosingMessage() {
   String[] arr = {"Y", "o", "u", " ", "L", "o", "s", "t", "!"};
@@ -145,7 +144,11 @@ public class MSButton
       flagged = !flagged;
       clicked = false;
     } else if (mines.contains(this)) {
-      displayLosingMessage();
+      displayLosingMessage(); 
+      gameOver = true; 
+      for (MSButton mine : mines) {
+        mine.clicked = true; 
+  }
     } else if (countMines(myRow, myCol) > 0) {
       setLabel(str(countMines(myRow, myCol)));
     } else {
